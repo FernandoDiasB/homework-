@@ -11,6 +11,7 @@ const bookSchema = new mongoose.Schema({
     },
     slug: String,
     description: {
+        required: [true, 'A book need a description'],
         type: String,
         trim: true
     },
@@ -22,7 +23,8 @@ const bookSchema = new mongoose.Schema({
     rating: {
         type: Number,
         min: [1, 'Rating must be above 1.0'],
-        max: [5, 'Rating must be below 5.0']
+        max: [5, 'Rating must be below 5.0'],
+        default: 4
     }
 });
 
