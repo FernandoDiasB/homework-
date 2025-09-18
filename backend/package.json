@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "pratcing beyond the curses",
+  "license": "ISC",
+  "author": "Fernando Dias",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "start:prod": "powershell -Command \"$env:NODE_ENV='production'; nodemon server.js\""
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "mongodb": "^6.19.0",
+    "mongoose": "^8.18.1",
+    "multer": "^2.0.2",
+    "slugify": "^1.6.6",
+    "validator": "^13.15.15"
+  }
+}
