@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const express = require('express');
+dotenv.config({ path: './config.env'})
 const bookRouter = require('./routes/bookRoutes.js');
 const AppError = require('./utils/appError.js');
 const cors = require('cors');
@@ -8,7 +9,6 @@ const path = require('path');
 
 //Handling uncaught exceptions
 
-dotenv.config({ path: './config.env'})
 
 const app = express();
 
