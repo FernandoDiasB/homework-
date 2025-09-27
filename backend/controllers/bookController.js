@@ -14,34 +14,36 @@ exports.getAllBooks = catchAsync(async (req, res) => {
     if(req.query.rating){
         queryObj.rating = {$gte: req.query.rating};
     }
-    
+
     let query = Book.find(queryObj);
     
     //sort
     if(req.query.sort) {
-        queryObj = query.sort({name: 1});
+        query = query.sort({name: 1});
     }
 
     if(req.query.sortRating){
-        queryObj = query.sort({rating: -1});
+        query = query.sort({rating: -1});
     }   
     
 
     // pagination
     const page = req.query.page * 1 || 1;
-    const limit = req.query.limit * 1 || 9;
+    const limit = req.query.limit * 1 || 6;
     const skip = (page - 1) * limit
 
-    query = query.skip(skip).limit(limit);
     if (req.query.page) {
         const numBooks = await Book.countDocuments();
         if (skip >= numBooks) throw new Error('This page does not exist');
     }
+
+    query = query.skip(skip).limit(limit);
     
-    const books = await Book.find(queryObj).skip(skip).limit(limit);
+    const books = await query;
+    const totalBooks = await Book.countDocuments(queryObj);
 
     res.status(200).json({
-        result: books.length,
+        result: totalBooks,
         status: 'success',
         requestedAt: req.requestTime,
         data: {
